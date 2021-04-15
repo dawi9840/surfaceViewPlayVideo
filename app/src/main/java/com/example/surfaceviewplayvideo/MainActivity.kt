@@ -1,4 +1,4 @@
-package com.example.surfaceviewplayvideo
+ package com.example.surfaceviewplayvideo
 
 import android.media.AudioManager
 import android.media.MediaPlayer
@@ -8,8 +8,11 @@ import android.os.Bundle
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.view.View
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.SeekBar
+import android.widget.TextView
+import org.w3c.dom.Text
 import java.lang.Exception
 
 open class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -23,35 +26,38 @@ open class MainActivity : AppCompatActivity(), View.OnClickListener {
     private var surfaceview: SurfaceView? = null
     private var mediaPlayer: MediaPlayer? = null
     private var start: ImageButton? = null
-    private var share: ImageButton? = null
-    private var back: ImageButton? = null
     private var pause: ImageButton? = null
     private var seekBar: SeekBar? = null
     private var isPlaying = false
     private var currentPosition = 0
+    private var btn: Button?= null
+    private var txt: TextView?= null
+
+
 
     private fun findViewById() {
         surfaceview = findViewById<View>(R.id.surfaceView) as SurfaceView
         start = findViewById<View>(R.id.video_start) as ImageButton
-        back = findViewById<View>(R.id.video_back) as ImageButton
         pause = findViewById<View>(R.id.video_pause) as ImageButton
-        share = findViewById<View>(R.id.video_share) as ImageButton
         seekBar = findViewById<View>(R.id.seekBar) as SeekBar
+        btn = findViewById(R.id.button)
+        txt = findViewById(R.id.textView)
     }
 
     private fun initView() {
         mediaPlayer = MediaPlayer()
         surfaceview!!.holder.setKeepScreenOn(true)
         surfaceview!!.holder.addCallback(SurfaceViewLis())
-        start!!.setOnClickListener(this)
-        back!!.setOnClickListener(this)
+        //start!!.setOnClickListener(this)
+        //back!!.setOnClickListener(this)
         pause!!.setOnClickListener(this)
-        share!!.setOnClickListener(this)
+        //share!!.setOnClickListener(this)
         seekBar!!.setOnClickListener(this)
+        btn!!.setOnClickListener(this)
     }
 
     private inner class SurfaceViewLis : SurfaceHolder.Callback {
-        override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {}
+        override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {}//表面尺寸發生改變的時候調用，如橫豎屏切換。
 
         override fun surfaceCreated(holder: SurfaceHolder) {
             // 創建 SurfaceHolder 的時候，如果存在上次播放的位置，則按照上次播放位置進行播放
@@ -72,7 +78,8 @@ open class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.video_start -> video_play(0)
+            //R.id.video_start -> video_play(0)
+            R.id.button -> video_play(0).also { txt?.text = "123" }
             R.id.video_pause -> pause()
             else -> {
             }
@@ -114,10 +121,12 @@ open class MainActivity : AppCompatActivity(), View.OnClickListener {
                         }
                     }
                 }.start()
-                start!!.isEnabled = false
+                //start!!.isEnabled = false
+                //btn!!.isEnabled = false
             }
             mediaPlayer!!.setOnCompletionListener {   // Called back after playing done
-                start!!.isEnabled = true
+                //start!!.isEnabled = true
+                //btn!!.isEnabled = true
             }
             mediaPlayer!!.setOnErrorListener {        // Replay when an error occurs
                     mp, what, extra ->
