@@ -21,6 +21,7 @@ open class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_main)
         findViewById()
         initView()
+        btn_test()
     }
 
     private var surfaceview: SurfaceView? = null
@@ -57,9 +58,10 @@ open class MainActivity : AppCompatActivity(), View.OnClickListener {
         seekBar!!.setOnClickListener(this)
         btn!!.setOnClickListener(this)
         btn2!!.setOnClickListener(this)
+    }
+    private fun btn_test(){
         btn3!!.setOnClickListener{ video_play3() }
     }
-
     private inner class SurfaceViewLis : SurfaceHolder.Callback {
         override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {}//表面尺寸發生改變的時候調用，如橫豎屏切換。
 
