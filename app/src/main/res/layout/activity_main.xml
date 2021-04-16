@@ -24,7 +24,15 @@
             android:layout_height="20dp"
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
-            android:background="@drawable/video_start"></ImageButton>
+            android:background="@drawable/video_start" />
+
+        <ImageButton
+            android:id="@+id/video_pause"
+            android:layout_width="22dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/video_pause" />
 
         <SeekBar
             android:id="@+id/seekBar"
@@ -37,52 +45,64 @@
             android:progressDrawable="@drawable/seekbar_style"
             android:thumb="@drawable/seekbar_thumb" />
 
-        <ImageButton
-            android:id="@+id/video_pause"
-            android:layout_width="15dp"
-            android:layout_height="14dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/video_pause" />
-
     </LinearLayout>
 
     <SurfaceView
         android:id="@+id/surfaceView"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_width="413dp"
+        android:layout_height="244dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.201" />
+        app:layout_constraintVertical_bias="0.256" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_gravity="top"
-        android:background="@drawable/video_top"
-        android:orientation="horizontal"
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Btn1"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.058"
-        tools:layout_editor_absoluteX="16dp">
+        app:layout_constraintVertical_bias="0.676" />
 
-        <ImageButton
-            android:id="@+id/video_back"
-            android:layout_width="15dp"
-            android:layout_height="18dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/video_back" />
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="btn2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.207"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95" />
 
-        <ImageButton
-            android:id="@+id/video_share"
-            android:layout_width="22dp"
-            android:layout_height="17dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="280dp"
-            android:background="@drawable/video_share" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="btn3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.78"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="159dp"
+        android:layout_height="30dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.793" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
