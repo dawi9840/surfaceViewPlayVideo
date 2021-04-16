@@ -31,9 +31,9 @@ open class MainActivity : AppCompatActivity(), View.OnClickListener {
     private var isPlaying = false
     private var currentPosition = 0
     private var btn: Button?= null
+    private var btn2: Button?= null
+    private var btn3: Button?= null
     private var txt: TextView?= null
-
-
 
     private fun findViewById() {
         surfaceview = findViewById<View>(R.id.surfaceView) as SurfaceView
@@ -41,6 +41,8 @@ open class MainActivity : AppCompatActivity(), View.OnClickListener {
         pause = findViewById<View>(R.id.video_pause) as ImageButton
         seekBar = findViewById<View>(R.id.seekBar) as SeekBar
         btn = findViewById(R.id.button)
+        btn2 = findViewById(R.id.button2)
+        btn3 = findViewById(R.id.button3)
         txt = findViewById(R.id.textView)
     }
 
@@ -54,6 +56,8 @@ open class MainActivity : AppCompatActivity(), View.OnClickListener {
         //share!!.setOnClickListener(this)
         seekBar!!.setOnClickListener(this)
         btn!!.setOnClickListener(this)
+        btn2!!.setOnClickListener(this)
+        btn3!!.setOnClickListener{ video_play3() }
     }
 
     private inner class SurfaceViewLis : SurfaceHolder.Callback {
@@ -61,10 +65,10 @@ open class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         override fun surfaceCreated(holder: SurfaceHolder) {
             // 創建 SurfaceHolder 的時候，如果存在上次播放的位置，則按照上次播放位置進行播放
-            if (currentPosition > 0) {
+            /*if (currentPosition > 0) {
                 video_play(currentPosition)
                 currentPosition = 0
-            }
+            }*/
         }
 
         override fun surfaceDestroyed(holder: SurfaceHolder) {
@@ -74,15 +78,75 @@ open class MainActivity : AppCompatActivity(), View.OnClickListener {
                 mediaPlayer!!.stop()
             }
         }
+
     }
 
     override fun onClick(v: View) {
+
         when (v.id) {
             //R.id.video_start -> video_play(0)
-            R.id.button -> video_play(0).also { txt?.text = "123" }
+            //R.id.button3 -> video_play3()
+            R.id.button -> video_play(0).also { txt?.text = "0000001" }
+            R.id.button2 -> video_play2()
             R.id.video_pause -> pause()
             else -> {
             }
+        }
+    }
+
+    private  fun video_play3(){
+        mediaPlayer = MediaPlayer()
+        mediaPlayer!!.setDataSource(this, Uri.parse("android.resource://" + packageName + "/" + R.raw.jump1))
+
+        mediaPlayer!!.setDisplay(surfaceview!!.holder)
+        mediaPlayer!!.prepareAsync()
+        mediaPlayer!!.setOnPreparedListener {
+            mediaPlayer!!.start()
+            txt?.text = "0000003"
+
+            btn!!.isEnabled = false
+            btn2!!.isEnabled = false
+            btn3!!.isEnabled = false
+        }
+        mediaPlayer!!.setOnCompletionListener {
+            txt?.text = "Play done!"
+
+            btn!!.isEnabled = true
+            btn2!!.isEnabled = true
+            btn3!!.isEnabled = true
+        }
+        mediaPlayer!!.setOnErrorListener {        // Replay when an error occurs
+            mp, what, extra ->
+            isPlaying = false
+            false
+        }
+    }
+
+    private fun video_play2(){
+        mediaPlayer = MediaPlayer()
+        mediaPlayer!!.setDataSource(this, Uri.parse("android.resource://" + packageName + "/" + R.raw.jump1))
+
+        // 設置顯示影像的SurfaceHolder
+        mediaPlayer!!.setDisplay(surfaceview!!.holder)  //這一步是關鍵，通過setDisplay()制定用於顯示影像的SurfaceView物件
+        mediaPlayer!!.prepareAsync()
+        mediaPlayer!!.setOnPreparedListener {
+            mediaPlayer!!.start()
+            txt?.text = "00000002"
+
+            btn!!.isEnabled = false
+            btn2!!.isEnabled = false
+            btn3!!.isEnabled = false
+        }
+        mediaPlayer!!.setOnCompletionListener {
+            txt?.text = "Play done!"
+            btn!!.isEnabled = true
+            btn2!!.isEnabled = true
+            btn3!!.isEnabled = true
+        }
+        mediaPlayer!!.setOnErrorListener {        // Replay when an error occurs
+            mp, what, extra ->
+            isPlaying = false
+            false
         }
     }
 
@@ -122,11 +186,16 @@ open class MainActivity : AppCompatActivity(), View.OnClickListener {
                     }
                 }.start()
                 //start!!.isEnabled = false
-                //btn!!.isEnabled = false
+                btn!!.isEnabled = false
+                btn2!!.isEnabled = false
+                btn3!!.isEnabled = false
             }
             mediaPlayer!!.setOnCompletionListener {   // Called back after playing done
                 //start!!.isEnabled = true
-                //btn!!.isEnabled = true
+                btn!!.isEnabled = true
+                btn2!!.isEnabled = true
+                btn3!!.isEnabled = true
+                txt?.text = "Play done!"
             }
             mediaPlayer!!.setOnErrorListener {        // Replay when an error occurs
                     mp, what, extra ->
